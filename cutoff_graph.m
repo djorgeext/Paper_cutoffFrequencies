@@ -28,11 +28,11 @@ end
 t=13.653333333333332/2;              %(load('frecuencia_remuestreo.txt'))
 t=t/2049;
 amp_fin=(amp_fin*t)/0.01;
-x=(0.01:0.01:1)';
-amp_fin = amp_fin(1:100);
+x=(0.01:0.01:1.2)';
+amp_fin = amp_fin(1:120);
 
 %%
-x1 = (0:0.001:1)';
+x1 = (0:0.001:1.2)';
 y1 = zeros(length(x1),1); y2 = y1; y3 = y1;
 
 load("fittedmodel.mat")
@@ -45,6 +45,19 @@ for i=1:length(x1)
     y2(i) = a2*exp(-((x1(i) - b2)/c2).^2);
     y3(i) = a3*exp(-((x1(i) - b3)/c3).^2);
 end
+cutoff = load("Cut_offF.txt");
+
+m1 = c2^2 - c1^2;
+n1 = 2*(b2*c1^2 - b1*c2^2);
+p1 = (b1^2)*c2^2 - (b2^2)*c1^2 - (c1^2)*(c2^2)*log(a1/a2);
+
+VLF_cut_off = max(roots([m1 n1 p1]));
+
+m2 = c3^2 - c2^2;
+n2 = 2*(b3*c2^2 - b2*c3^2);
+p2 = (b2^2)*c3^2 - (b3^2)*c2^2 - (c2^2)*(c3^2)*log(a2/a3);
+
+LF_cut_off = min(roots([m2 n2 p2]));
 
 bar(x,amp_fin,LineWidth=2)
 hold on;
@@ -52,7 +65,11 @@ plot(x1, y1, LineWidth=4);
 plot(x1, y2, LineWidth=4);
 plot(x1, y3, LineWidth=4);
 grid on
-title('Sujeto 16273 = 28 años')
+line([VLF_cut_off,VLF_cut_off], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+line([LF_cut_off,LF_cut_off], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+line([cutoff(3),cutoff(3)], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+
+%title('Sujeto 4009')
 ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
 xlabel('$\mathrm{f (Hz)}$',Interpreter='latex');
 set(gca, 'FontSize', 28);

@@ -63,11 +63,29 @@ for i=1:length(x1)
     y3(i) = a3*exp(-((x1(i) - b3)/c3).^2);
 end
 
+%cutoff = load("Cut_offF.txt");
+
+m1 = c2^2 - c1^2;
+n1 = 2*(b2*c1^2 - b1*c2^2);
+p1 = (b1^2)*c2^2 - (b2^2)*c1^2 - (c1^2)*(c2^2)*log(a1/a2);
+
+VLF_cut_off = max(roots([m1 n1 p1]));
+
+m2 = c3^2 - c2^2;
+n2 = 2*(b3*c2^2 - b2*c3^2);
+p2 = (b2^2)*c3^2 - (b3^2)*c2^2 - (c2^2)*(c3^2)*log(a2/a3);
+
+LF_cut_off = max(roots([m2 n2 p2]));
+
 bar(x,amp_fin,LineWidth=2)
 hold on;
 plot(x1, y1, LineWidth=4);
 plot(x1, y2, LineWidth=4);
 plot(x1, y3, LineWidth=4);
+grid on
+line([VLF_cut_off,VLF_cut_off], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+line([LF_cut_off,LF_cut_off], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+%line([cutoff(3),cutoff(3)], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 grid on
 title('Promedio de los r01, r04, r07, r08 y r10')
 ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
