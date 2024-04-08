@@ -28,11 +28,11 @@ end
 t=13.653333333333332/2;              %(load('frecuencia_remuestreo.txt'))
 t=t/2049;
 amp_fin=(amp_fin*t)/0.01;
-x=(0.01:0.01:1.15)';
-amp_fin = amp_fin(1:115);
+x=(0.01:0.01:2)';
+amp_fin = amp_fin(1:200);
 
 %%
-x1 = (0:0.001:1.15)';
+x1 = (0:0.001:2)';
 y1 = zeros(length(x1),1); y2 = y1; y3 = y1;
 
 load("fittedmodel.mat")
@@ -59,7 +59,8 @@ p2 = (b2^2)*c3^2 - (b3^2)*c2^2 - (c2^2)*(c3^2)*log(a2/a3);
 LF_cut_off = max(roots([m2 n2 p2]));
 %
 cutoff(1) = VLF_cut_off; cutoff(2) = LF_cut_off; % correccion del calculo de las cutoff
-%slim = int32(100*round(fittedmodel.b3+3*((fittedmodel.c3)/sqrt(2)),2));
+%cutoff(3) = fittedmodel.b3+3*((fittedmodel.c3)/sqrt(2));
+%slim = int32(100*round(cutoff(3),2));
 % save("fittedmodel.mat","fittedmodel","-mat")
 % save("goodness.mat","goodness","-mat")
 % save("Metodos_ajuste.mat","output","-mat")
@@ -78,7 +79,7 @@ grid on
 line([VLF_cut_off,VLF_cut_off], [0, a1*1.2], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 line([LF_cut_off,LF_cut_off], [0, a1*1.2], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 line([cutoff(3),cutoff(3)], [0, a1*1.2], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
-xlim([0 1.15])
+xlim([0 2])
 
 %title('Sujeto 4009')
 ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');

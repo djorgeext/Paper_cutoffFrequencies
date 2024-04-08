@@ -67,7 +67,7 @@ m2 = 1/(c2^2) - 1/(c3^2);
 n2 = b3/((c3^2)/2) - b2/((c2^2)/2);
 p2 = (b2^2)/(c2^2) - (b3^2)/(c3^2) - log(c3/c2);
 
-LF_cut_off = max(roots([m2 n2 p2]));
+LF_cut_off = min(roots([m2 n2 p2]));
 
 HF_cut_off = b3 + 3*(c3/sqrt(2));    % HF cut-off según el paper se define como la media + 3*(desvío estándar)
 Sdeviations = ([c1; c2; c3])/sqrt(2);
