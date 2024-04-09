@@ -63,7 +63,7 @@ for i=1:length(x1)
     y3(i) = a3*exp(-((x1(i) - b3)/c3).^2);
 end
 
-%cutoff = load("Cut_offF.txt");
+cutoff = zeros(3,1);
 
 m1 = c2^2 - c1^2;
 n1 = 2*(b2*c1^2 - b1*c2^2);
@@ -77,6 +77,15 @@ p2 = (b2^2)*c3^2 - (b3^2)*c2^2 - (c2^2)*(c3^2)*log(a2/a3);
 
 LF_cut_off = max(roots([m2 n2 p2]));
 
+cutoff(1) = VLF_cut_off; cutoff(2) = LF_cut_off; % correccion del calculo de las cutoff
+cutoff(3) = fittedmodel.b3+3*((fittedmodel.c3)/sqrt(2));
+ilim = int32(100 * round(LF_cut_off,2));
+slim = int32(100*round(cutoff(3),2));
+hfarea = (sum(amp_fin(ilim:slim)))/sum(amp_fin(1:slim));
+hfarea = hfarea * 100
+
+save("Cut_offF.txt","cutoff","-ascii");
+
 bar(x,amp_fin,LineWidth=2)
 hold on;
 plot(x1, y1, LineWidth=4);
@@ -85,7 +94,7 @@ plot(x1, y3, LineWidth=4);
 grid on
 line([VLF_cut_off,VLF_cut_off], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 line([LF_cut_off,LF_cut_off], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
-%line([cutoff(3),cutoff(3)], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+line([cutoff(3),cutoff(3)], [0, a1*1.3], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 grid on
 title('Promedio de los r01, r04, r07, r08 y r10')
 ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
