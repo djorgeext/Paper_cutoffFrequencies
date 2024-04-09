@@ -59,13 +59,13 @@ p2 = (b2^2)*c3^2 - (b3^2)*c2^2 - (c2^2)*(c3^2)*log(a2/a3);
 LF_cut_off = max(roots([m2 n2 p2]));
 %
 cutoff(1) = VLF_cut_off; cutoff(2) = LF_cut_off; % correccion del calculo de las cutoff
-%cutoff(3) = fittedmodel.b3+3*((fittedmodel.c3)/sqrt(2));
-%slim = int32(100*round(cutoff(3),2));
+cutoff(3) = fittedmodel.b3+3*((fittedmodel.c3)/sqrt(2));
+slim = int32(100*round(cutoff(3),2));
 % save("fittedmodel.mat","fittedmodel","-mat")
 % save("goodness.mat","goodness","-mat")
 % save("Metodos_ajuste.mat","output","-mat")
 save("Cut_offF.txt","cutoff","-ascii");
-ilim = int32(100 * round(LF_cut_off,2)); slim = int32(100 * round(cutoff(3),2));
+ilim = int32(100 * round(LF_cut_off,2)); %slim = int32(100 * round(cutoff(3),2));
 hfarea = (sum(amp_fin(ilim:slim)))/sum(amp_fin(1:slim));
 hfarea = hfarea * 100
 save("hfarea.txt","hfarea","-ascii")
