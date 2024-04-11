@@ -86,4 +86,3 @@ ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
 xlabel('$\mathrm{f (Hz)}$',Interpreter='latex');
 set(gca, 'FontSize', 28);
 set(gca, 'LineWidth', 3);
-clearvars

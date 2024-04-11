@@ -7,7 +7,7 @@ function sprom = sp_prom(data)
 
     for j=1:cant-1
         x = data((segm*j-511):(segm*(j+1)));
-        x = x-mean(x);
+        x = (x-mean(x))/std(x);
         sp = (abs(fft(x))).^2;
         sprom = sprom + sp(1:(segm+1));
     end
@@ -16,7 +16,7 @@ function sprom = sp_prom(data)
     
     for j=1:cant-1
         x = data((segm*j-511):(segm*(j+1)));
-        x = x-mean(x);
+        x = (x-mean(x))/std(x);
         sp = (abs(fft(x))).^2;
         sprom = sprom + sp(1:(segm+1));
     end

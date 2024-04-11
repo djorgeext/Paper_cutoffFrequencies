@@ -13,5 +13,3 @@ for i in range(len(df)):
     folder_path = os.path.join(directory, folder_name)
     file_path = os.path.join(folder_path, 'hfarea.txt')
     hfarea.append(np.loadtxt(file_path))
-
-print(df[0])

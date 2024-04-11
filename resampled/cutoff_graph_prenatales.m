@@ -101,3 +101,21 @@ ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
 xlabel('$\mathrm{f (Hz)}$',Interpreter='latex');
 set(gca, 'FontSize', 28);
 set(gca, 'LineWidth', 3);
+
+%%
+Cut_offF = load("Cut_offF.txt");
+ilim = int32(100*round(Cut_offF(1),2));
+slim = int32(100*round(Cut_offF(2),2));
+hlim = int32(100*round(Cut_offF(3),2));
+VLF_area = (sum(amp_fin(1:ilim)))/sum(amp_fin(1:hlim));
+LF_area = (sum(amp_fin((ilim+1):slim)))/sum(amp_fin(1:hlim));
+HF_area = (sum(amp_fin((slim+1):hlim)))/sum(amp_fin(1:hlim));
+hf_lf = (sum(amp_fin((slim+1):hlim)))/sum(amp_fin((ilim+1):slim));
+VLF_area = VLF_area*100;
+LF_area = LF_area*100;
+HF_area = HF_area*100;
+
+save("VLF_area.txt", "VLF_area","-ascii")
+save("LF_area.txt", "LF_area","-ascii")
+save("HF_area.txt", "HF_area","-ascii")
+save("HF_LF.txt", "hf_lf","-ascii")
