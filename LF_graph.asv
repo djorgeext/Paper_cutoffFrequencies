@@ -79,6 +79,6 @@ end
 % save("HF_area.txt", "HF_area","-ascii")
 % save("HF_LF.txt", "hf_lf","-ascii")
 
-save("VLF_cutoff.txt", "VLF_cutoff","-ascii")
-save("LF_cutoff.txt", "LF_cutoff","-ascii")
-save("HF_cutoff.txt", "HF_cutoff","-ascii")
+save("VLF_area.txt", "VLF_area","-ascii")
+save("LF_area.txt", "LF_area","-ascii")
+save("HF_area.txt", "HF_area","-ascii")

@@ -28,11 +28,11 @@ end
 t=13.653333333333332/2;              %(load('frecuencia_remuestreo.txt'))
 t=t/2049;
 amp_fin=(amp_fin*t)/0.01;
-x=(0.01:0.01:2)';
-amp_fin = amp_fin(1:200);
+x=(0.01:0.01:1)';
+amp_fin = amp_fin(1:100);
 
 %%
-x1 = (0:0.001:2)';
+x1 = (0:0.001:1)';
 y1 = zeros(length(x1),1); y2 = y1; y3 = y1;
 
 load("fittedmodel.mat")
@@ -50,7 +50,7 @@ m1 = c2^2 - c1^2;
 n1 = 2*(b2*c1^2 - b1*c2^2);
 p1 = (b1^2)*c2^2 - (b2^2)*c1^2 - (c1^2)*(c2^2)*log(a1/a2);
 
-VLF_cut_off = min(roots([m1 n1 p1]));
+VLF_cut_off = max(roots([m1 n1 p1]));
 
 m2 = c3^2 - c2^2;
 n2 = 2*(b3*c2^2 - b2*c3^2);
@@ -64,26 +64,25 @@ slim = int32(100*round(cutoff(3),2));
 % save("fittedmodel.mat","fittedmodel","-mat")
 % save("goodness.mat","goodness","-mat")
 % save("Metodos_ajuste.mat","output","-mat")
-save("Cut_offF.txt","cutoff","-ascii");
+%save("Cut_offF.txt","cutoff","-ascii");
 ilim = int32(100 * round(LF_cut_off,2)); %slim = int32(100 * round(cutoff(3),2));
 hfarea = (sum(amp_fin((ilim+1):slim)))/sum(amp_fin(1:slim));
 hfarea = hfarea * 100
-save("hfarea.txt","hfarea","-ascii")
+%save("hfarea.txt","hfarea","-ascii")
 %
-bar(x,amp_fin,LineWidth=2)
+bar(x,amp_fin,LineWidth=4,BarWidth=1)
 hold on;
 plot(x1, y1, LineWidth=4);
 plot(x1, y2, LineWidth=4);
 plot(x1, y3, LineWidth=4);
 grid on
-line([VLF_cut_off,VLF_cut_off], [0, a1*1.2], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
-line([LF_cut_off,LF_cut_off], [0, a1*1.2], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
-line([cutoff(3),cutoff(3)], [0, a1*1.2], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
-xlim([0 2])
-
-%title('Sujeto 4009')
+line([VLF_cut_off,VLF_cut_off], [0, max(amp_fin)*1.05], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+line([LF_cut_off,LF_cut_off], [0, max(amp_fin)*1.05], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+line([cutoff(3),cutoff(3)], [0, max(amp_fin)*1.05], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+title('d')
 ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
 xlabel('$\mathrm{f (Hz)}$',Interpreter='latex');
-set(gca, 'FontSize', 28);
-set(gca, 'LineWidth', 3);
-clearvars
+set(gca, 'FontSize', 42);
+set(gca, 'LineWidth', 4);
+xlim([0 0.8])
+%clearvars

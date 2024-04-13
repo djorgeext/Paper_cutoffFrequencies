@@ -86,7 +86,7 @@ hfarea = hfarea * 100
 
 %save("Cut_offF.txt","cutoff","-ascii");
 
-bar(x,amp_fin,LineWidth=4,BarWidth=1)
+bar(x,amp_fin,LineWidth=4, BarWidth=4)
 hold on;
 plot(x1, y1, LineWidth=4);
 plot(x1, y2, LineWidth=4);
@@ -95,6 +95,7 @@ grid on
 line([VLF_cut_off,VLF_cut_off], [0, max(amp_fin)*1.05], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 line([LF_cut_off,LF_cut_off], [0, max(amp_fin)*1.05], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
 line([cutoff(3),cutoff(3)], [0, max(amp_fin)*1.05], 'Color', 'k', 'LineStyle', '--', LineWidth=6);
+grid on
 title('a')
 ylabel('$\mathrm{PSD (Hz^{-1})}$',Interpreter='latex');
 xlabel('$\mathrm{f (Hz)}$',Interpreter='latex');
