@@ -1,0 +1,6 @@
+prenatales -- negro
+0 -- 0.5 azul
+0.5 -- 1.5 cyan
+1.5 -- 2.08 magenta
+2.08 -- 4.5 verde
+7 -- 10 rojo

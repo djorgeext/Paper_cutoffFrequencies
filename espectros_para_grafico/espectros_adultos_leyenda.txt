@@ -1,0 +1,6 @@
+0 -- 0.5 negro
+11 -- 14 azul
+15 -- 24 cyan
+26 -- 34 magenta
+35 -- 45 verde
+70 -- 74 rojo
