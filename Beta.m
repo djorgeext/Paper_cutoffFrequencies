@@ -7,14 +7,14 @@ hf_vlf = load('HF_VLF.txt'); hf_vlf = hf_vlf(C);
 
 % Ajustar un modelo a los datos
 %fittedbeta = fit(log10(edad(90:end)), beta(90:end), 'poly1');
-fittedhf = fit(log10(edad_2(105:end)), log10(hf_vlf(105:end)), 'poly1');
+[fittedhf,gof,output] = fit(log10(edad_2(105:end)), log10(hf_vlf(105:end)), 'poly1');
 y = zeros(length(edad),1); y(70:110) = 1;
 
 
 figure, plot(log10(edad), beta, 'ok', 'MarkerSize', 12, 'MarkerFaceColor','black'); % Grafica los datos
 hold on
 plot(log10(edad(70:110)), y(70:110), 'k', 'LineWidth',6, 'LineStyle','--')
-ylabel('$\mathrm{Beta}$', 'Interpreter','latex');
+ylabel('$\mathrm{\beta}$', 'Interpreter','latex');
 xlabel('$\mathrm{log}_{10}\mathrm{Age}$', 'Interpreter', 'latex');
 set(gca, 'FontSize', 42);
 set(gca, 'LineWidth', 4);

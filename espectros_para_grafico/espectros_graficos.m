@@ -34,13 +34,15 @@ yticks([10^4 10^6 10^8])
 xticks([0.01 0.1 0.5])
 
 
-figure (2), loglog(f(3:end), sp0_05(3:end), 'b', 'LineWidth', 6);
+figure (2), loglog(f(3:end), sp0_05(3:end), 'k', 'LineWidth', 6);
 hold on
 loglog(f(3:end), sp05_15(3:end), 'c', 'LineWidth',6)
 loglog(f(3:end), sp15_208(3:end), 'm', 'LineWidth',6)
 loglog(f(3:end), sp208_45(3:end), 'g', 'LineWidth',6)
 loglog(f(3:end), sp7_10(3:end), 'r', 'LineWidth',6)
-loglog(f(3:end), r0_prom, 'k', 'LineWidth',6)
+loglog(f(3:end), r0_prom, 'b', 'LineWidth',6)
+loglog(f(3:33),y1(3:33),':k', LineWidth=6)
+loglog(f(3:33),y2(3:33),'--k', LineWidth=6)
 
 ylabel('$\mathrm{S(f)}$', 'Interpreter','latex');
 xlabel('$\mathrm{f}$', 'Interpreter', 'latex');

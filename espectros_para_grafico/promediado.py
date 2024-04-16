@@ -1,8 +1,8 @@
 import numpy as np
 
 directory = '/home/david/Documents/Paper_cutoffFrequencies/espectros_rrsanos_1024/sp513_'
-ages = np.loadtxt('/home/david/Documents/ages_ord.txt')
-names = np.loadtxt('/home/david/Documents/nombres.txt', dtype=str)
+ages = np.loadtxt('/home/david/Documents/Paper_cutoffFrequencies/ages_ord.txt')
+names = np.loadtxt('/home/david/Documents/Paper_cutoffFrequencies/nombres.txt', dtype=str)
 
 amp_m = []
 
@@ -61,12 +61,5 @@ amp_m = np.array(amp_m) """
 #plt.show()
 #pr = np.loadtxt(directory + df[0] + '.txt')
 #pr.reshape((1, -1)).shape
-
-
-
-
-
-
-
 
 #print(file_path)
